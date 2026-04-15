@@ -44,5 +44,4 @@ python agent_simulation.py
 
 ## Ket qua
 Extracted 5 records.
-Valid: 3
-Errors: 2
+3 valid, 2 dropped.
