@@ -1,8 +1,8 @@
 # Experiment Report: Data Quality Impact on AI Agent
 
-**Student ID:** AI20K-XXXX
-**Name:** (Dien ten cua ban)
-**Date:** (Dien ngay thuc hien)
+**Student ID:** 2A202600333
+**Name:** Truong Quang Loc
+**Date:** 15/4/2026
 
 ---
 
@@ -12,8 +12,8 @@ Chay `agent_simulation.py` voi 2 bo du lieu va ghi lai ket qua:
 
 | Scenario | Agent Response | Accuracy (1-10) | Notes |
 |----------|----------------|-----------------|-------|
-| Clean Data (`processed_data.csv`) | (Ghi cau tra loi cua Agent) | | |
-| Garbage Data (`garbage_data.csv`) | (Ghi cau tra loi cua Agent) | | |
+| Clean Data (`processed_data.csv`) | Based on my data, the best choice is Laptop at $1200. | 10 | Correct and useful recommendation |
+| Garbage Data (`garbage_data.csv`) | Based on my data, the best choice is Nuclear Reactor at $999999. | 1 | Technically executed, but the answer is absurd and misleading |
 
 ---
 
@@ -21,15 +21,18 @@ Chay `agent_simulation.py` voi 2 bo du lieu va ghi lai ket qua:
 
 ### Tai sao Agent tra loi sai khi dung Garbage Data?
 
-(Viet nhan xet cua ban o day — it nhat 50 tu)
-
 (Hay phan tich cac van de nhu Duplicate IDs, wrong data types, outliers, null values
 va giai thich tai sao chung anh huong den ket qua cua Agent.)
 
----
+Agent didn't give the wrong answer, agent was given wrong knowledge.
+
+> - **Outlier** (`price=999999`): no range check
+> - **Wrong type** (`price="ten dollars"`): silently poisons numeric operations
+> - **Duplicate ID** (`id=1` x2): corrupts any downstream count or join
+> - **Null fields** (empty `id`/`category`): ghost rows that surface anywhere.
 
 ## 3. Ket luan
 
 **Quality Data > Quality Prompt?** (Dong y hay khong? Giai thich ngan gon.)
 
-(Viet ket luan cua ban o day)
+Yes. Garbage in, garbage out
